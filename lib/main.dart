@@ -1,8 +1,10 @@
 // import 'dart:html';
+import 'package:app/favorite.dart';
+import 'package:app/search.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:permission_handler/permission_handler.dart';
 import './body.dart';
-import './body2.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,7 +16,13 @@ void main() {
 }
 
 class home extends StatelessWidget {
+  void requestPermission() {
+    Permission.storage.request();
+  }
+
   Widget build(BuildContext context) {
+    requestPermission();
+
     return Scaffold(
       appBar: AppBar(
           leadingWidth: 100,
@@ -26,7 +34,13 @@ class home extends StatelessWidget {
             ),
           ),
           actions: [
-            Icon(Icons.search),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SearchScreen();
+                  }));
+                },
+                icon: Icon(Icons.search)),
             Padding(
                 padding: EdgeInsets.all(10),
                 child: Icon(Icons.more_horiz_outlined))
