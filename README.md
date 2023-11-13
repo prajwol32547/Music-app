@@ -13,10 +13,6 @@ This Flutter app serves as a basic music player, allowing users to play their fa
 - Progress slider for tracking the current position in the song
 - Minimalistic user interface
 
-## Screenshots
-
-Include screenshots or gifs of your app here.
-
 ## Getting Started
 
 ### Prerequisites
