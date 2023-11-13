@@ -1,8 +1,8 @@
 import 'package:app/NowPlaying.dart';
-import 'package:flutter/Material.dart';
+import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
-// import 'package:permission_handler/permission_handler.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -11,11 +11,7 @@ class Body extends StatefulWidget {
 
 class BodyState extends State<Body> {
   // }
-
-  // void requestPermission() {
-  //   Permission.storage.request();
-  // }
-
+  @override
   final _audioquery = new OnAudioQuery();
   final AudioPlayer _audioPlayer = new AudioPlayer();
 
@@ -60,11 +56,17 @@ class BodyState extends State<Body> {
                       },
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(8, 10, 8, 10),
-                        child: ListTile(
-                            leading: Icon(Icons.music_note_outlined),
-                            title: Text(item.data![index].displayNameWOExt),
-                            subtitle: Text('${item.data![index].artist}'),
-                            trailing: Icon(Icons.play_circle_fill_outlined)),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Colors.white30, width: 0.7))),
+                          child: ListTile(
+                              leading: Icon(Icons.music_note_outlined),
+                              title: Text(item.data![index].displayNameWOExt),
+                              subtitle: Text('${item.data![index].artist}'),
+                              trailing: Icon(Icons.play_circle_fill_outlined)),
+                        ),
                       ));
                 },
               );
@@ -73,5 +75,10 @@ class BodyState extends State<Body> {
         ),
       ),
     ]));
+  }
+
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
   }
 }
